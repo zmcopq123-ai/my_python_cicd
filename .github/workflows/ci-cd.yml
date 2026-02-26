@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: 检出代码
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 设置Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -59,7 +59,7 @@ jobs:
           echo "✅ 测试完成，Python版本: ${{ matrix.python-version }}"
 
       - name: 上传测试覆盖率报告
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report-${{ matrix.python-version }}
           path: htmlcov/
@@ -72,7 +72,7 @@ jobs:
 
     steps:
       - name: 检出代码
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 设置Python
         uses: actions/setup-python@v4
@@ -89,7 +89,7 @@ jobs:
           echo "✅ 构建完成"
 
       - name: 上传构建产物
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist-packages
           path: dist/
