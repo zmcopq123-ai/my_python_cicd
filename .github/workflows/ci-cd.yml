@@ -2,6 +2,7 @@ name: Python CI/CD 流水线
 
 # 触发条件
 on:
+  workflow_dispatch:
   push:
     branches: [ main, develop ]
   pull_request:
