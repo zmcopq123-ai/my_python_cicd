@@ -118,3 +118,27 @@ jobs:
           echo "- 状态: 成功 ✅" >> $GITHUB_STEP_SUMMARY
           echo "- 环境: 生产环境" >> $GITHUB_STEP_SUMMARY
           echo "- 版本: $(git rev-parse --short HEAD)" >> $GITHUB_STEP_SUMMARY
+
+  # 新增：自动部署到Windows电脑B
+  deploy-to-windows:
+    runs-on: ubuntu-latest
+    needs: [ test ]  # 等待测试通过
+    if: github.ref == 'refs/heads/main'  # 只有main分支才触发
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 通过SSH连接到Windows电脑B并更新代码
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 192.168.110.196  # 【重要】改成电脑B的真实IP
+          username: fulai\65762  # 【重要】改成电脑B的用户名
+          key: ${{ secrets.WINDOWS_SSH_KEY }}
+          port: 22
+          script: |
+            echo "🚀 开始同步代码到Windows电脑B..."
+            cd d:\PythonProject\my_python_cicd
+            git pull origin main
+            echo "✅ 同步完成！当前代码版本："
+            git log -1 --pretty=format:"%h - %s, %cd"
