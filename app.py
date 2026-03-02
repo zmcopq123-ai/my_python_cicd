@@ -33,5 +33,6 @@ if __name__ == "__main__":    # 函数和主程序之间也要空2行
     print(f"10 × 5 = {multiply(10, 5)}")
     print(f"10 ÷ 5 = {divide(10, 5)}")
     print(f"100 的开平方 = {square_root(100)}")
+    print("CI/CD 工作流测试")
 
 # 文件末尾要有一个空行（非常重要！）
